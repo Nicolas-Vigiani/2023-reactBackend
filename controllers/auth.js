@@ -23,7 +23,7 @@ const crearUsuario = async (req, res = response) => { // la res = response es pa
         }
 
         usuario = new Usuario(req.body); // aqui en el req.body le mando los paramentros que tiene ese body adentro es decir name, email, password. mongoose interpreta que vienen esos parametro
-        
+
         //!Encriptar contraseña usando bcrypt
         const salt = bcrypt.genSaltSync(); // codifica por defecto 10 vueltas de encriptacion
         usuario.password = bcrypt.hashSync(password, salt);// 1) parametro lo que quiero encriptar, 2) el metodo de encriptacion salt
@@ -105,17 +105,19 @@ const loginUsuario = async (req, res = response) => {
 
 }
 
-const revalidarToken = async(req, res = response) => {
-  
+const revalidarToken = async (req, res = response) => {
+
     /* const uid = req.uid;
     const name = req.name; */
-    const {uid, name} = req;
+    const { uid, name } = req;
 
     //Generar JWT
     const token = await generarJWT(uid, name);
 
     res.json({
         ok: true,
+        uid,
+        name,
         token
     })
 }
