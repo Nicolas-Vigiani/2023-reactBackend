@@ -28,6 +28,11 @@ app.use('/api/auth', require('./routes/auth')); // este path se concatena con el
 // CRUD: Eventos
 app.use('/api/events', require('./routes/events'));
 
+//! esto es para que ande en railway o heroku es un comodin para que no sea cualquiera de las rutas anteriores vaya al archivo index
+app.get('*', (req, res) => {
+    res.sendFile(__dirname + '/public/index.html'); 
+})
+//! aqui termina esta parte que debo copiar y pegar para que ande en railway video corregir ruta en express
 
 
 //escuchar peticiones
